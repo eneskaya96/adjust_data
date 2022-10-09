@@ -27,6 +27,7 @@ class GlobalConfig(BaseConfig):
     SALT_SECRET_KEY: str = Field('\x1bEy6\xcc\x96\x16\xb3E!\xec\xd6\xb3M\xcf\x90')
 
     """Configurations"""
+    PROPAGATE_EXCEPTIONS: Optional[bool] = Field(True)  # must be true to return api errors
     DOMAIN_NAME: Optional[str]
 
     SQLALCHEMY_DATABASE_URI: Optional[str]
