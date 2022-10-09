@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="dev" type="PythonConfigurationType" factoryName="Python">
-    <module name="adjust_data" />
+    <module name="lemin_saas_api" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
@@ -8,13 +8,12 @@
       <env name="ENVIRONMENT" value="dev" />
       <env name="FLASK_ENV" value="development" />
       <env name="FLASK_DEBUG" value="1" />
-      <env name="FLASK_APP" value="src/app" />
       <env name="FLASK_RUN_HOST" value="localhost" />
       <env name="FLASK_RUN_PORT" value="5005" />
     </envs>
-    <option name="SDK_HOME" value="" />
+    <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-    <option name="IS_MODULE_SDK" value="true" />
+    <option name="IS_MODULE_SDK" value="false" />
     <option name="ADD_CONTENT_ROOTS" value="false" />
     <option name="ADD_SOURCE_ROOTS" value="false" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
