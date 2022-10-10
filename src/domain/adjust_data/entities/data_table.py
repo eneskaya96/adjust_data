@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+from datetime import date
 from src.domain.seed_work.model.base_entity_model import BaseStrEntityModel
 
 
@@ -18,9 +18,8 @@ class DataTable(BaseStrEntityModel):
         orm_mode = True
 
     @classmethod
-    def create_data(cls,
-                    clicks: int,
-                    date: date,
+    def create_data(cls, clicks: int,
+                    _date: date,
                     channel: str,
                     country: str,
                     os: str,
@@ -29,7 +28,7 @@ class DataTable(BaseStrEntityModel):
                     spend: float,
                     revenue: float) -> DataTable:
         return cls(clicks=clicks,
-                   date=date,
+                   date=_date,
                    channel=channel,
                    country=country,
                    os=os,

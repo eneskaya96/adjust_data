@@ -1,8 +1,9 @@
-from typing import Optional, List, Any
+from typing import Optional, List
 
 from sqlalchemy import func, desc, asc
 
-from src.api.models.dto.fortune.data_table_request_dto import DataTableRequestDto
+from src.api.models.dto.adjust.data_table_request_dto import DataTableRequestDto
+from src.api.models.dto.adjust.data_table_response_dto import DataTableResponseDto
 from src.domain.adjust_data.entities.data_table import DataTable as DomainDataTable
 from src.domain.adjust_data.repositories.data_table_repository import DataTableRepository as DataTableDomainRepository
 from src.infrastructure.entities.adjust_management.data_table import DataTable
@@ -14,7 +15,7 @@ class DataTableRepository(BaseGenericRepository[DomainDataTable], DataTableDomai
     def __init__(self) -> None:
         super().__init__(DataTable, DomainDataTable)
 
-    def get_data(self, data_request_schema: DataTableRequestDto) -> Optional[List[Any]]:
+    def get_data(self, data_request_schema: DataTableRequestDto) -> Optional[List[DataTableResponseDto]]:
 
         # query of what we get
         query = self.session.query(DataTable.date,
@@ -25,7 +26,8 @@ class DataTableRepository(BaseGenericRepository[DomainDataTable], DataTableDomai
                                    func.sum(DataTable.impressions).label("impressions"),
                                    func.sum(DataTable.installs).label("installs"),
                                    func.sum(DataTable.spend).label("spend"),
-                                   func.sum(DataTable.revenue).label("revenue"))
+                                   func.sum(DataTable.revenue).label("revenue"),
+                                   func.avg(DataTable.spend / DataTable.installs).label("cpi"))
 
         # add time filter to query
         query_filter_with_time = query.filter(DataTable.date >= data_request_schema.date_from,
@@ -49,11 +51,12 @@ class DataTableRepository(BaseGenericRepository[DomainDataTable], DataTableDomai
                 .group_by(*data_request_schema.group_with)
 
         # all sorting with direction
-        results = query_group
+        result = query_group
         for sort_col in data_request_schema.sort_column:
             if sort_col.get("direction") == "asc":
-                results = query_group.order_by(asc(sort_col.get("sort_column")))
+                result = query_group.order_by(asc(sort_col.get("sort_column")))
             elif sort_col.get("direction") == "desc":
-                results = query_group.order_by(desc(sort_col.get("sort_column")))
+                result = query_group.order_by(desc(sort_col.get("sort_column")))
 
-        return results.all()
+        results = result.all()
+        return [DataTableResponseDto.create_data(res) for res in results]

@@ -18,3 +18,15 @@ class DataTableResponseDto(BaseModel):
     revenue: Optional[float] = None
     cpi: Optional[float] = None
 
+    @classmethod
+    def create_data(cls, data) -> DataTableResponseDto:
+        return cls(clicks=data.clicks,
+                   date=data.date,
+                   channel=data.channel,
+                   country=data.country,
+                   os=data.os,
+                   impressions=data.impressions,
+                   installs=data.installs,
+                   spend=data.spend,
+                   revenue=data.revenue,
+                   cpi=data.cpi)

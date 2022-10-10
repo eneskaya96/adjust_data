@@ -2,8 +2,8 @@ from typing import List, Any
 
 from flask_restx import Namespace
 
-from src.api.models.dto.fortune.data_table_request_dto import DataTableRequestDto
-from src.api.models.dto.fortune.data_table_response_dto import DataTableResponseDto
+from src.api.models.dto.adjust.data_table_request_dto import DataTableRequestDto
+from src.api.models.dto.adjust.data_table_response_dto import DataTableResponseDto
 
 
 # define model schemas here to register them only once. auth_controller registers these schemas.

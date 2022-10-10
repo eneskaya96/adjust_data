@@ -5,6 +5,7 @@ from src.infrastructure.entities.base_entity import BaseStrEntity
 
 @dataclass
 class DataTable(BaseStrEntity):
+    id: int
     clicks: int
     date: date
     channel: str

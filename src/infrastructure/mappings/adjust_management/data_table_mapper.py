@@ -14,7 +14,8 @@ class DataTableMapper(BaseMapper):
     def perform_mapping(self, mappings: Dict[type, Table]) -> Table:
         data_table_mapping = Table(
             'data_table', self._metadata,
-            Column('clicks', Integer, primary_key=True),
+            Column('id', Integer, primary_key=True),
+            Column('clicks', Integer),
             Column('date', String(250)),
             Column('channel', String(250)),
             Column('country', String(250)),
