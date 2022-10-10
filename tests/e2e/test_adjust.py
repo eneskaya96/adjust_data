@@ -10,6 +10,7 @@ from tests.e2e import get_api_url, get_authorization, get_base_response
 @pytest.mark.usefixtures('db_session', 'client', 'uow')
 class TestAdjust:
 
+    # TODO: lots of case should be tested, I just give an example
     @staticmethod
     def test_get_data(client: FlaskClient):
 
