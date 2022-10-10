@@ -19,11 +19,12 @@ If you want to downgrade to a specific revision of a migration:
     flask db downgrade <revision_id>
 
 
-Flask Run http://localhost:5000/adjust_api/v1
+Flask Run for swagger http://localhost:5000/adjust_api/v1
 
         export FLASK_APP=src/app
         flask run
 
+host is post : http://localhost:5000/adjust_api/v1/data with request body
 
 
 1. use case
